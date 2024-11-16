@@ -1,0 +1,598 @@
+/* Custom Navbar Style */
+.custom-navbar {
+    background: linear-gradient(135deg, #ff5733, #c70039); /* Warna latar belakang navbar */
+}
+.custom-navbar .navbar-nav .nav-link,
+.custom-navbar .auth-options .btn-outline-primary {
+    color: #fff; /* Warna teks navbar */
+}
+.custom-navbar .auth-options .btn-outline-primary:hover {
+    background-color: white; /* Warna hover tombol "Log In" */
+    border-color: black;
+    color: #000000;
+}
+.custom-navbar .auth-options .btn-outline-primary {
+    border-color: white;
+}
+.custom-navbar .auth-options .btn-primary {
+    background-color: white; /* Warna tombol "Daftar" */
+    border-color: black;
+    color: black;
+}
+
+/* Banner Style */
+.banner {
+    background-color: #ff4757;
+    padding: 80px 0;
+}
+.banner h1 {
+    font-size: 2.5rem;
+}
+.banner-menu .btn {
+    margin: 0 5px;
+    background-color: #ffffff; /* Background putih */
+    color: #000000; /* Teks hitam */
+    border: 1px solid #ddd; /* Border tipis untuk memisahkan */
+}
+
+.banner-menu .btn:hover {
+    background-color: #f0f0f0; /* Warna latar belakang saat hover */
+    color: #333; /* Warna teks saat hover */
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 0px;
+}
+
+footer p {
+    margin-bottom: 0px;
+}
+
+/* Card Styles for Transport Options */
+.card {
+    border: none;
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card img {
+    height: 150px;
+    object-fit: contain;
+}
+
+.navbar-brand img {
+    width: 120px;
+    height: 50px;
+}
+
+.new-banner {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 0px;
+}
+
+.trending-activities {
+    background-color: #f8f9fa;
+}
+
+.activity-cards {
+    overflow-x: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scroll-behavior: smooth;
+}
+
+.activity-cards::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.activity-card {
+    flex: 0 0 auto;
+    width: 300px; /* Adjust width as needed */
+    position: relative;
+}
+
+.activity-image {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    height: 200px; /* Set a fixed height for a uniform look */
+}
+
+.activity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the container without stretching */
+    border-radius: 8px;
+}
+
+.location-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 99, 71, 0.9);
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.custom-left-align {
+    text-align: left !important; /* Override any inherited center alignment */
+}
+
+.trending-activities {
+    position: relative;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 99, 71, 0.9);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.scroll-left {
+    left: -20px;
+}
+
+.scroll-right {
+    right: -20px;
+}
+
+.scroll-btn:hover {
+    background-color: rgba(231, 104, 81, 0.9);
+}
+
+.new-banner .banner-item {
+    background-color: rgba(0, 0, 0, 0.5); /* Background semi-transparan */
+    color: white; /* Warna teks putih */
+    padding: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+}
+
+/* Carousel Item Styles */
+.new-banner .carousel-item {
+    position: relative;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.new-banner .carousel-item img {
+    filter: brightness(70%); /* Memberikan efek gelap agar teks lebih mudah dibaca */
+    border-radius: 15px;
+}
+
+/* Banner Text Styling */
+.new-banner .banner-item {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    max-width: 90%;
+}
+
+.new-banner .banner-item h5 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: #ffd700; /* Warna emas untuk judul */
+}
+
+.new-banner .banner-item p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+/* Carousel Indicators */
+.new-banner .carousel-indicators button {
+    background-color: #ffd700;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.new-banner .carousel-indicators .active {
+    background-color: #ffffff;
+}
+
+/* Carousel Controls */
+.new-banner .carousel-control-prev-icon,
+.new-banner .carousel-control-next-icon {
+    filter: invert(1); /* Mengubah warna ikon panah menjadi putih */
+    width: 2rem;
+    height: 2rem;
+}
+
+/* Animation Effects */
+.new-banner .carousel-item.active {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Carousel Section Background */
+.new-banner {
+    margin: 0px;
+    padding: 3rem 0;
+}
+
+/* Tambahkan efek shadow di sekitar container untuk memisahkan carousel dari background */
+.new-banner .container {
+    border-radius: 15px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1); /* Efek semi-transparan */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Efek warna pada teks */
+.new-banner .banner-item h5 {
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.new-banner .banner-item p {
+    color: #f9f9f9;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Carousel Control Colors */
+.new-banner .carousel-control-prev-icon,
+.new-banner .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.4); /* Transparansi hitam agar ikon lebih jelas */
+    border-radius: 50%;
+    padding: 1rem;
+}
+
+.services {
+    background-color: #f8f9fa;
+}
+
+.services h2 {
+    font-size: 2.5rem;
+    color: black;
+    font-weight: 700;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    background-color: #ffffff;
+}
+
+.card-text {
+    color: #333;
+    font-size: 1.1rem;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.navbar-nav .nav-item .nav-link {
+    position: relative;
+    padding-bottom: 5px; /* Memberikan ruang untuk garis */
+}
+
+.navbar-nav .nav-item .nav-link.active {
+    color: #fff; /* Ubah warna teks jika perlu */
+}
+
+.navbar-nav .nav-item .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Ukuran garis */
+    background-color: white; /* Warna garis */
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+
+.close-btn {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.continue-btn {
+    width: 100%;
+    padding: 12px;
+    background: #eee;
+    color: #666;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.divider {
+    text-align: center;
+    margin: 16px 0;
+    color: #666;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+    background: #E3F2FD;
+    color: #333;
+    margin-bottom: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.terms {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+
+.terms a {
+    color: #0064D2;
+    text-decoration: none;
+}
+
+/* Profile Section Styling */
+#profile-section {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: white; /* Blue color for text */
+}
+
+/* Profile Icon Styling */
+#profile-section img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 2px solid white; /* Brown border color */
+}
+
+/* Username and Points */
+#profile-section span {
+    margin-right: 8px;
+}
+
+/* Points Icon Styling */
+#profile-section .points-icon {
+    background-color: #fcd800; /* Yellow background */
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 4px;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+/* Dropdown Icon Styling */
+#profile-section .dropdown-icon {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profil_login {
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: bold; /* Membuat teks menjadi bold */
+    position: relative; /* Untuk penempatan pseudo-element */
+    padding: 5px 10px; /* Menambahkan padding untuk ruang */
+    border-radius: 5px; /* Membulatkan sudut */
+    transition: background-color 0.3s, color 0.3s; /* Animasi transisi */
+}
+
+/* Efek Hover */
+.profil_login:hover {
+    color: #ffffff; /* Mengubah warna teks saat hover */
+    background-color: #ff3a3a; /* Mengubah latar belakang saat hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
+}
+
+/* Menambahkan garis bawah animasi pada hover */
+.profil_login::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    left: 50%;
+    bottom: 0;
+    transition: width 0.3s, left 0.3s;
+}
+
+.profil_login:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Menambahkan ikon profil */
+.profil_login::before {
+    margin-right: 8px;
+    transition: transform 0.3s;
+}
+
+.profil_login:hover::before {
+    transform: scale(1.2); /* Membesarkan ikon saat hover */
+}
+
+/* Default button styling */
+.continue-btn {
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Styling for enabled (active) button */
+.continue-btn.active {
+    background-color: red;
+    cursor: pointer;
+}
+
+.continue-btn {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+.continue-btn.valid {
+    border-color: green;
+}
+
+.continue-btn.invalid {
+    border-color: red;
+}
+
+.continue-btn {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.continue-btn.active {
+    background-color: #ff0000; /* Red color */
+    color: #fff;
+    cursor: pointer;
+}
+
+.continue-btn {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.continue-btn.active {
+    background-color: #ff0000; /* Red color */
+    color: #fff;
+    cursor: pointer;
+}
