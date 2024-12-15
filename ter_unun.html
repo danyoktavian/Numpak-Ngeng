@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numpak Ngeng - Aplikasi Transportasi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="Bus.png" type="image/x-icon">
+    <style>
+        .bottom-nav-item.active {
+            color: #E74C3C;
+        }
+        .route-card {
+            transition: transform 0.2s;
+        }
+        .route-card:hover {
+            transform: translateY(-2px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container_riw {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .date-filter {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .date-filter select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .transaction-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .transaction-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .transaction-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .transaction-icon {
+            width: 50px;
+            height: 50px;
+            background: #ff6b6b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .transaction-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .transaction-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .transaction-details {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #ff6b6b;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 0.5rem;
+        }
+
+        .recent-transactions {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .transaction-list {
+            list-style: none;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container_riw {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .date-filter {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .date-filter select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .transaction-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .transaction-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .transaction-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .transaction-icon {
+            width: 50px;
+            height: 50px;
+            background: #ff6b6b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .transaction-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .transaction-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .transaction-details {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #ff6b6b;
+        }
+
+        .recent-transactions {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .transaction-list {
+            list-style: none;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .profil_login {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .profile-trigger:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 280px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 8px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dropdown-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .username {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .balance {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: #eee;
+            margin: 8px 0;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            color: #666;
+        }
+
+        .logout {
+            color: #ff4757;
+        }
+
+        .logout i {
+            color: #ff4757;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header/Navbar -->
+    <header class="navbar navbar-expand-lg custom-navbar shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo_numpak_ngeng.png" alt="Numpak Ngeng" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Menambahkan Font Awesome -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+                <ul class="navbar-nav ms-auto">
+                    <div class="nav-itemhiden">
+                        <img style="width: 120px;" src="Dany.png" alt="Profile Icon">
+                    </div>
+                    <h2 style="margin-left: 10px;" class="detail-profil">PenumpangBus</h2>
+                    <p style="margin-left: 10px;" class="detail-profil">Google</p>
+                    <div style="margin-left: 10px;" class="detail-profil">
+                        <p><strong>Email:</strong> penumpang@gmail.com</p>
+                        <p><strong>No. HP:</strong> +62 812-3456-7890</p>
+                        <p><strong>Bergabung:</strong> 20 Oktober 2023</p>
+                    </div><hr>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="halaman_login.html">
+                            <i class="fa-solid fa-house-chimney" style="color: #ff4757;"></i> Beranda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="riwayat.html">
+                            <i class="fa-solid fa-clock-rotate-left" style="color: #ff4757;"></i> Riwayat
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="scan.html">
+                            <i class="fa-solid fa-qrcode" style="color: #ff4757;"></i> Scan QR
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="hadiah.html">
+                            <i class="fa-solid fa-gift" style="color: #ff4757;"></i> Hadiah
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link active" href="halaman_login.html">
+                            <i class="fa-solid fa-house-chimney" style="color: #ff4757;"></i> Beranda
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="riwayat.html">
+                            <i class="fa-solid fa-clock-rotate-left" style="color: #ff4757;"></i> Riwayat
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="scan.html">
+                            <i class="fa-solid fa-qrcode" style="color: #ff4757;"></i> Scan QR
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="hadiah.html">
+                            <i class="fa-solid fa-gift" style="color: #ff4757;"></i> Hadiah
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="notifikasi.html">
+                            <i class="fa-solid fa-bell" style="color: #ff4757;"></i> Notifikasi
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="tentang_kami.html">
+                            <i class="fas fa-info-circle" style="color: #ff4757;"></i> Tentang Kami
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="integrasi.html">
+                            <i class="fa-solid fa-map-location-dot" style="color: #ff4757;"></i> Integrasi
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="faq.html">
+                            <i class="fa-solid fa-circle-question" style="color: #ff4757;"></i> FAQ
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a class="nav-link" href="profil.html">
+                            <i class="fa-solid fa-user" style="color: #ff4757;"></i> Profil
+                        </a>
+                    </li>
+                    <li class="nav-item-hiden">
+                        <a href="index.html" class="nav-link-exit">
+                            <i class="fa-solid fa-door-open" style="color: #ff4757;"></i> Keluar
+                        </a>
+                    </li>
+                </ul>
+                <style>
+                    @media (min-width: 884px) {
+                        .navbar-toggler {
+                            background-color: white !important;
+                            border-color: #fff;
+                        }
+
+                        .navbar-toggler-icon {
+                            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+                        }
+
+                        /* Kembalikan tampilan desktop */
+                        .nav-item {
+                            display: block; /* Tampilkan item navigasi */
+                        }
+
+                        .nav-itemhiden {
+                            display: none; /* Sembunyikan item tambahan */
+                        }
+
+                        .profile-trigger {
+                            display: flex; /* Tampilkan profil trigger */
+                        }
+
+                        .navbar-nav .nav-link {
+                            color: black;
+                            margin-left: 0;
+                        }
+
+                        .navbar-collapse {
+                            position: static; /* Kembalikan posisi normal */
+                            width: auto;
+                            height: auto;
+                            background-color: transparent;
+                            right: auto;
+                        }
+
+                        .fa-solid {
+                            display: inline-block; /* Tampilkan ikon */
+                        }
+
+                        .detail-profil {
+                            display: none; /* Tetap sembunyikan detail profil */
+                        }
+
+                        .navbar-toggler {
+                            background-color: white;
+                        }
+                    }
+                    /* Atur posisi navbar di luar layar saat collapsible */
+                    @media (max-width: 768px) {
+                        .navbar-toggler {
+                            background-color: white !important;
+                            border-color: #fff;
+                            margin-right: 12px;
+                        }
+
+                        .navbar-toggler-icon {
+                            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+                        }
+                        
+                        .nav-item {
+                            display: none;
+                        }
+
+                        .nav-itemhiden {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                        }
+                        .navbar-nav .nav-link-exit {
+                            color: #ff4757 !important; /* Menambahkan !important untuk memastikan warna diterapkan */
+                            margin-left: 15px;
+                            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                            text-decoration: none;
+                        }
+
+                        .navbar-nav .nav-link {
+                            color: black !important; /* Menambahkan !important untuk memastikan warna diterapkan */
+                            margin-left: 15px;
+                            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                        }
+
+                        .navbar-nav .nav-itemhiden {
+                            color: black !important; /* Menambahkan !important untuk memastikan warna diterapkan */
+                            margin-left: 15px;
+                            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                        }
+
+                        .navbar-nav i {
+                            margin-right: 8px;
+                        }
+
+                        .navbar-collapse {
+                            position: fixed;
+                            top: 0;
+                            right: -250px; /* Menyembunyikan menu ke kanan */
+                            width: 250px;
+                            height: 100%;
+                            background-color: white; /* Warna latar belakang menu */
+                            transition: right 0.3s ease;
+                        }
+
+                        .navbar-collapse.show {
+                            right: 0; /* Menampilkan menu dengan sliding dari kanan ke kiri */
+                        }
+
+                        /* Menyembunyikan teks dan tombol di Android mode */
+                        .navbar-toggler {
+                            background-color: white;
+                        }
+
+                        .auth-options {
+                            display: none;
+                        }
+                    }
+                    @media (min-width: 769px) {
+                        .navbar-nav .nav-itemhiden {
+                            display: none;
+                        }
+
+                        .fa-solid {
+                            display: none;
+                        }
+
+                        .detail-profil {
+                            display: none;
+                        }
+
+                        .modal {
+                            padding-top: 25px;
+                        }
+                    }
+                </style>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const profileSection = document.getElementById('profile-section');
+                        const dropdownMenu = profileSection.querySelector('.dropdown-menu');
+                    
+                        profileSection.addEventListener('click', function(e) {
+                            dropdownMenu.classList.toggle('show');
+                            e.stopPropagation();
+                        });
+                    
+                        // Close dropdown when clicking outside
+                        document.addEventListener('click', function(e) {
+                            if (!profileSection.contains(e.target)) {
+                                dropdownMenu.classList.remove('show');
+                            }
+                        });
+                    });
+                </script>
+                
+                <div id="profile-section" class="profil_login">
+                    <div class="profile-trigger">
+                        <img src="Dany.png" alt="Profile Icon">
+                        <span>PenumpangBus</span>
+                        <span>|</span>
+                        <span>Rp. 50.000</span>
+                        <span class="dropdown-icon">▼</span>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header">
+                            <img src="Dany.png" alt="Profile Icon">
+                            <div class="user-info">
+                                <span class="username">PenumpangBus</span>
+                                <span class="balance">Saldo: Rp. 50.000</span>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="profil.html" class="dropdown-item">
+                            <i class="fas fa-user"></i>Profil Saya
+                        </a>
+                        <a href="profil.html" class="dropdown-item">
+                            <i class="fas fa-wallet"></i>Saldo Saya
+                        </a>
+                        <a href="riwayat.html" class="dropdown-item">
+                            <i class="fas fa-history"></i>Riwayat Transaksi
+                        </a>
+                        <a href="notifikasi.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i>Notifikasi
+                        </a>
+                        <a href="tentang_kami.html" class="dropdown-item">
+                            <i class="fas fa-info-circle"></i>Tentang Kami
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="dropdown-item logout">
+                            <i class="fas fa-sign-out-alt"></i>Keluar
+                        </a>
+                        </div>
+                    </div>
+                </div> 
+                <!-- Tambahkan style baru untuk mode Android -->
+                <style>
+                    @media (max-width: 768px) {
+                        /* Sembunyikan dropdown menu di mode Android */
+                        .profil_login {
+                            display: none !important;
+                        }
+
+                        .navbar-nav {
+                            padding-bottom: 5px;
+                        }
+                    }
+                </style>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        @media (max-width: 768px) {
+            .navbar-collapse {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100%;
+                background-color: white;
+                transition: right 0.3s ease;
+                overflow-y: auto; /* Aktifkan scroll vertikal */
+            }
+            .navbar-collapse.show {
+                right: 0;
+            }
+        }
+    </style>
+
+    <style>
+        /* Atur posisi navbar di luar layar saat collapsible */
+        @media (max-width: 768px) {
+            .profile-trigger {
+                display: none;
+            }
+
+            .navbar-nav .nav-link-exit {
+                color: #ff4757 !important; /* Menambahkan !important untuk memastikan warna diterapkan */
+                margin-left: 15px;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-decoration: none;
+            }
+
+            .navbar-nav .nav-link {
+                color: black !important; /* Menambahkan !important untuk memastikan warna diterapkan */
+                margin-left: 15px;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            .navbar-nav .nav-item-hiden {
+                color: black !important; /* Menambahkan !important untuk memastikan warna diterapkan */
+                margin-left: 0px;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            .navbar-nav i {
+                margin-right: 8px;
+            }
+
+            .navbar-collapse {
+                position: fixed;
+                top: 0;
+                right: -250px; /* Menyembunyikan menu ke kanan */
+                width: 250px;
+                height: 100%;
+                background-color: white; /* Warna latar belakang menu */
+                transition: right 0.3s ease;
+            }
+
+            .navbar-collapse.show {
+                right: 0; /* Menampilkan menu dengan sliding dari kanan ke kiri */
+            }
+
+            /* Menyembunyikan teks dan tombol di Android mode */
+            .navbar-toggler {
+                background-color: white;
+            }
+
+            .auth-options {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar-nav .nav-item-hiden {
+                display: none;
+            }
+
+            .fa-solid {
+                display: none;
+            }
+
+            .detail-profil {
+                display: none;
+            }
+
+            .modal {
+                padding-top: 25px;
+            }
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+        $('.navbar-toggler').click(function(){
+            $('#navbarNav').toggleClass('show');
+        });
+    });
+    </script>
+    <script>
+        document.addEventListener('click', function(event) {
+            var isClickInside = document.getElementById('navbarNav').contains(event.target);
+            var isToggleButton = event.target.classList.contains('navbar-toggler') || event.target.closest('.navbar-toggler');
+    
+            if (!isClickInside && !isToggleButton) {
+                var navbarCollapse = document.getElementById('navbarNav');
+                var bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide(); // Menutup menu ketika klik di luar
+            }
+        });
+    </script>
+
+    <h2 style="text-align: center; margin: 15px;">UNDIP - UNNES</h2>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <style>
+        #map {
+            height: 400px; /* Tinggi peta */
+            width: 100%;
+        }
+        
+        .container {
+            padding: 0px;
+        }
+    </style>
+    <div class="container my-5">
+        <div id="map"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([-7.0051453, 110.4381254], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+    </script>
+    <!-- Footer -->
+    <footer class="mobile-footer bg-light" style="margin-top: 0px;">
+        <!-- Previous footer content remains the same -->
+         <!-- Footer -->
+    <footer class="text-center py-4 bg-light"><hr>
+        <p>&copy; 2024 Numpak Ngeng | Senang Bersama</p>
+    </footer>
+        
+        <!-- Add mobile-specific navigation bar for bottom of screen -->
+        <div class="mobile-nav-bar fixed-bottom d-md-none">
+            <div class="row g-0">
+                <div class="col">
+                    <a href="halaman_login.html" class="nav-item active">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff4757" d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185l0-121c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32l0 36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1l32 0 0 69.7c-.1 .9-.1 1.8-.1 2.8l0 112c0 22.1 17.9 40 40 40l16 0c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2l31.9 0 24 0c22.1 0 40-17.9 40-40l0-24 0-64c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 64 0 24c0 22.1 17.9 40 40 40l24 0 32.5 0c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1l16 0c22.1 0 40-17.9 40-40l0-16.2c.3-2.6 .5-5.3 .5-8.1l-.7-160.2 32 0z"/></svg>
+                        <span>Beranda</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="riwayat.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
+                            <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
+                            <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+                            <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                        <span>Riwayat</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="scan.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-qr-code-scan" viewBox="0 0 16 16">
+                            <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z"/>
+                            <path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z"/>
+                            <path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z"/>
+                            <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z"/>
+                            <path d="M12 9h2V8h-2v1Z"/>
+                        </svg>
+                        <span>Scan</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="hadiah.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" enable-background="new 0 0 64 64" viewBox="0 0 64 64" id="reward">
+                            <path d="M61 7H40.414l3.293-3.293c.286-.286.372-.716.217-1.09C43.769 2.244 43.404 2 43 2h-6c-.265 0-.52.105-.707.293L32 6.586l-4.293-4.293C27.52 2.105 27.265 2 27 2h-6c-.404 0-.769.244-.924.617-.155.374-.069.804.217 1.09L23.586 7H3C2.448 7 2 7.448 2 8v8c0 .552.448 1 1 1h24 10 24c.552 0 1-.448 1-1V8C62 7.448 61.552 7 61 7zM37.414 4h3.172l-3 3H37h-2.586L37.414 4zM23.414 4h3.172l3 3H27h-.586L23.414 4zM4 9h22v6H4V9zM28 15V9h4 4v6H28zM60 15H38V9h22V15zM61 36H37 27 3c-.552 0-1 .448-1 1v24c0 .552.448 1 1 1h24 10 24c.552 0 1-.448 1-1V37C62 36.448 61.552 36 61 36zM4 38h22v22H4V38zM28 60V38h8v22H28zM60 60H38V38h22V60zM38.953 24.899c-.117-.367-.433-.634-.814-.688l-3.631-.509-1.617-3.158c-.342-.669-1.438-.669-1.78 0l-1.617 3.158-3.631.509c-.381.053-.698.321-.814.688s-.012.768.269 1.032l2.605 2.447-.613 3.447c-.066.374.084.752.388.978.304.226.709.26 1.048.089L32 31.242l3.256 1.65C35.399 32.964 35.554 33 35.708 33c.211 0 .42-.067.596-.197.304-.226.455-.604.388-.978l-.613-3.447 2.605-2.447C38.965 25.667 39.07 25.266 38.953 24.899zM34.315 27.291c-.247.231-.359.571-.3.904l.357 2.007-1.92-.973c-.142-.072-.297-.108-.452-.108s-.31.036-.452.108l-1.92.973.357-2.007c.06-.333-.053-.673-.3-.904l-1.478-1.389 2.078-.291c.323-.045.603-.245.751-.535L32 23.194l.964 1.882c.148.29.429.49.751.535l2.078.291L34.315 27.291zM52 23c-5.514 0-10 4.486-10 10h2c0-4.411 3.589-8 8-8V23zM13 20v2c3.86 0 7 3.14 7 7h2C22 24.038 17.962 20 13 20z"></path>
+                            <rect width="2" height="2" x="54" y="23"></rect>
+                            <rect width="2" height="2" x="9" y="20"></rect>
+                            <path d="M9 29c2.206 0 4 1.794 4 4h2c0-3.309-2.691-6-6-6V29zM54 33h2c0-3.309 2.691-6 6-6v-2C57.589 25 54 28.589 54 33zM41 24h2c0-1.103.897-2 2-2v-2C42.794 20 41 21.794 41 24z"></path>
+                            <rect width="2" height="2" x="4" y="31"></rect>
+                            <rect width="2" height="2" x="2" y="23"></rect>
+                            <rect width="2" height="2" x="59" y="20"></rect>
+                            <rect width="2" height="2" x="48" y="29"></rect>
+                            <rect width="2" height="2" x="20" y="31"></rect>
+                            <rect width="2" height="2" x="23" y="20"></rect>
+                            <rect width="2" height="2" x="40" y="40"></rect>
+                            <rect width="2" height="2" x="44" y="40"></rect>
+                            <rect width="2" height="2" x="48" y="40"></rect>
+                            <rect width="2" height="2" x="52" y="40"></rect>
+                            <rect width="2" height="2" x="56" y="40"></rect>
+                            <rect width="2" height="2" x="40" y="44"></rect>
+                            <rect width="2" height="2" x="44" y="44"></rect>
+                            <rect width="2" height="2" x="48" y="44"></rect>
+                            <rect width="2" height="2" x="52" y="44"></rect>
+                            <rect width="2" height="2" x="56" y="44"></rect>
+                            <rect width="2" height="2" x="40" y="48"></rect>
+                            <rect width="2" height="2" x="44" y="48"></rect>
+                            <rect width="2" height="2" x="48" y="48"></rect>
+                            <rect width="2" height="2" x="52" y="48"></rect>
+                            <rect width="2" height="2" x="56" y="48"></rect>
+                            <rect width="2" height="2" x="40" y="52"></rect>
+                            <rect width="2" height="2" x="44" y="52"></rect>
+                            <rect width="2" height="2" x="48" y="52"></rect>
+                            <rect width="2" height="2" x="52" y="52"></rect>
+                            <rect width="2" height="2" x="56" y="52"></rect>
+                            <rect width="2" height="2" x="40" y="56"></rect>
+                            <rect width="2" height="2" x="44" y="56"></rect>
+                            <rect width="2" height="2" x="48" y="56"></rect>
+                            <rect width="2" height="2" x="52" y="56"></rect>
+                            <rect width="2" height="2" x="56" y="56"></rect>
+                            <rect width="2" height="2" x="6" y="40"></rect>
+                            <rect width="2" height="2" x="10" y="40"></rect>
+                            <rect width="2" height="2" x="14" y="40"></rect>
+                            <rect width="2" height="2" x="18" y="40"></rect>
+                            <rect width="2" height="2" x="22" y="40"></rect>
+                            <rect width="2" height="2" x="6" y="44"></rect>
+                            <rect width="2" height="2" x="10" y="44"></rect>
+                            <rect width="2" height="2" x="14" y="44"></rect>
+                            <rect width="2" height="2" x="18" y="44"></rect>
+                            <rect width="2" height="2" x="22" y="44"></rect>
+                            <rect width="2" height="2" x="6" y="48"></rect>
+                            <rect width="2" height="2" x="10" y="48"></rect>
+                            <rect width="2" height="2" x="14" y="48"></rect>
+                            <rect width="2" height="2" x="18" y="48"></rect>
+                            <rect width="2" height="2" x="22" y="48"></rect>
+                            <rect width="2" height="2" x="6" y="52"></rect>
+                            <rect width="2" height="2" x="10" y="52"></rect>
+                            <rect width="2" height="2" x="14" y="52"></rect>
+                            <rect width="2" height="2" x="18" y="52"></rect>
+                            <rect width="2" height="2" x="22" y="52"></rect>
+                            <rect width="2" height="2" x="6" y="56"></rect>
+                            <rect width="2" height="2" x="10" y="56"></rect>
+                            <rect width="2" height="2" x="14" y="56"></rect>
+                            <rect width="2" height="2" x="18" y="56"></rect>
+                            <rect width="2" height="2" x="22" y="56"></rect>
+                          </svg>
+                        <span>Hadiah</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="profil.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                        </svg>
+                        <span>Profil</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+        <style>
+            /* Existing footer styles */
+            .mobile-footer {
+                margin-top: 2rem;
+            }
+            
+            .footer-heading {
+                font-size: 1.1rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+            
+            .footer-section ul li {
+                margin-bottom: 0.5rem;
+            }
+            
+            .footer-section ul li a:hover {
+                color: #0d6efd !important;
+                text-decoration: underline !important;
+            }
+            
+            /* Mobile Navigation Bar Styles */
+            .mobile-nav-bar {
+                background: white;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                padding: 0.5rem 0;
+                z-index: 1000;
+            }
+    
+            .mobile-nav-bar .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: #6c757d;
+                text-decoration: none;
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+    
+            .mobile-nav-bar .nav-item.active {
+                color: #ff3a3a;
+            }
+    
+            .mobile-nav-bar .nav-item span {
+                margin-top: 0.25rem;
+            }
+    
+            .mobile-nav-bar svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+    
+            /* Responsive Padding for Mobile */
+            @media (max-width: 767.98px) {
+                .mobile-footer {
+                    padding-bottom: 4.5rem; /* Add padding to account for fixed bottom nav */
+                }
+                
+                .footer-section {
+                    text-align: center;
+                    margin-bottom: 1.5rem;
+                }
+                
+                .footer-social {
+                    padding-bottom: 5rem;
+                }
+            }
+    
+            /* Social Media Hover Effects */
+            .footer-social a:hover {
+                transform: translateY(-3px);
+                transition: transform 0.2s ease;
+            }
+    
+            /* Download Buttons Hover Effect */
+            .footer-section .btn:hover {
+                transform: translateY(-2px);
+                transition: transform 0.2s ease;
+                background-color: #f8f9fa;
+            }
+        </style>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const container = document.querySelector('.activity-cards');
+        const scrollLeftBtn = document.querySelector('.scroll-left');
+        const scrollRightBtn = document.querySelector('.scroll-right');
+
+        function scrollLeft() {
+            container.scrollBy({
+                left: -container.clientWidth, // Menggeser sesuai lebar container
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollRight() {
+            container.scrollBy({
+                left: container.clientWidth, // Menggeser sesuai lebar container
+                behavior: 'smooth'
+            });
+        }
+
+        function updateScrollButtons() {
+            // Jika posisi scroll berada di paling kiri, sembunyikan tombol kiri
+            if (container.scrollLeft === 0) {
+                scrollLeftBtn.style.display = 'none';
+            } else {
+                scrollLeftBtn.style.display = 'flex';
+            }
+
+            // Jika posisi scroll berada di paling kanan, sembunyikan tombol kanan
+            if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+                scrollRightBtn.style.display = 'none';
+            } else {
+                scrollRightBtn.style.display = 'flex';
+            }
+        }
+
+        // Tambahkan event listener untuk tombol kiri dan kanan
+        scrollLeftBtn.addEventListener('click', scrollLeft);
+        scrollRightBtn.addEventListener('click', scrollRight);
+
+        // Update tombol setiap kali terjadi scroll
+        container.addEventListener('scroll', updateScrollButtons);
+
+        // Panggil fungsi update sekali pada awal pemuatan
+        updateScrollButtons();
+    });
+
+    </script>
+    <script>
+        const modal = document.getElementById('loginModal');
+
+        function openModal() {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        function toggleButton() {
+            const inputField = document.getElementById("contactInput");
+            const continueBtn = document.getElementById("continueBtn");
+
+            // Enable the button and add active class if input field has value
+            if (inputField.value.trim() !== "") {
+                continueBtn.disabled = false;
+                continueBtn.classList.add("active"); // Adds red color and pointer
+            } else {
+                continueBtn.disabled = true;
+                continueBtn.classList.remove("active"); // Reverts to grey color and disabled state
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const container = document.querySelector('.activity-cards');
+        const scrollLeftBtn = document.querySelector('.scroll-left');
+        const scrollRightBtn = document.querySelector('.scroll-right');
+
+        function scrollLeft() {
+            container.scrollBy({
+                left: -container.clientWidth, // Menggeser sesuai lebar container
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollRight() {
+            container.scrollBy({
+                left: container.clientWidth, // Menggeser sesuai lebar container
+                behavior: 'smooth'
+            });
+        }
+
+        function updateScrollButtons() {
+            // Jika posisi scroll berada di paling kiri, sembunyikan tombol kiri
+            if (container.scrollLeft === 0) {
+                scrollLeftBtn.style.display = 'none';
+            } else {
+                scrollLeftBtn.style.display = 'flex';
+            }
+
+            // Jika posisi scroll berada di paling kanan, sembunyikan tombol kanan
+            if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+                scrollRightBtn.style.display = 'none';
+            } else {
+                scrollRightBtn.style.display = 'flex';
+            }
+        }
+
+        // Tambahkan event listener untuk tombol kiri dan kanan
+        scrollLeftBtn.addEventListener('click', scrollLeft);
+        scrollRightBtn.addEventListener('click', scrollRight);
+
+        // Update tombol setiap kali terjadi scroll
+        container.addEventListener('scroll', updateScrollButtons);
+
+        // Panggil fungsi update sekali pada awal pemuatan
+        updateScrollButtons();
+    });
+
+    </script>
+
+    <script>
+        function openModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+        
+        function toggleButton() {
+            const input = document.getElementById('contactInput');
+            const button = document.getElementById('continueBtn');
+            button.disabled = input.value.trim() === '';
+        }
+        
+        function handleContinue() {
+            // Hide auth options and show profile section
+            document.getElementById('auth-options').style.display = 'none';
+            document.getElementById('profile-section').style.display = 'flex';
+            
+            // Close the modal
+            closeModal();
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        </script>
+
+    <script>
+        const inputField = document.querySelector('.continue-btn');
+
+        inputField.addEventListener('input', function() {
+        if (this.value.trim() === '') {
+            this.classList.remove('valid', 'invalid');
+        } else if (this.value.length >= 3) {
+            this.classList.add('valid');
+            this.classList.remove('invalid');
+        } else {
+            this.classList.add('invalid');
+            this.classList.remove('valid');
+        }
+        });
+
+        const continueBtn = document.getElementById("continueBtn");
+    
+        inputField.addEventListener('input', function() {
+        if (this.value.trim() !== "") {
+            continueBtn.classList.add("active");
+        } else {
+            continueBtn.classList.remove("active");
+        }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numpak Ngeng | Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #ff6b81;
+            --background-light: #fff0f0;
+            --text-dark: #2f3542;
+            --text-muted: #57606f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 8px 20px rgba(255,71,87,0.15);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+        }
+
+        .back-button {
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s ease;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .header-desc {
+            padding: 20px 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: 15px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .form-container {
+            padding: 32px 24px;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            margin-top: -16px;
+            box-shadow: 0 -10px 20px rgba(255,71,87,0.1);
+        }
+
+        .form-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ffb3b3;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255,71,87,0.2);
+        }
+
+        .continue-button {
+            width: 100%;
+            padding: 14px;
+            background: #ff4757;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+        }
+
+        .continue-button.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(255,71,87,0.4);
+        }
+
+        .divider {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: #ffb3b3;
+            margin: 0 16px;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .social-link {
+            text-decoration: none;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-button {
+            width: 100%;
+            max-width: 300px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .social-button.google {
+            background-color: #DC4E41;
+        }
+
+        .social-button.facebook {
+            background-color: #3b5998;
+        }
+
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+        }
+
+        .social-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .terms {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.6;
+            margin-top: 24px;
+        }
+
+        .terms a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .continue-button.active:hover {
+            animation: pulse 0.7s infinite;
+        }
+
+        
+        @media (min-width: 884px) {
+            .container {
+                max-width: 100%;
+                margin: 0 auto;
+                background: white;
+                min-height: 100vh;
+                box-shadow: 0 8px 20px rgba(255,71,87,0.15);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">←</a>
+            <h1 class="header-title">Login/Daftar</h1>
+        </div>
+        
+        <div class="header-desc">
+            Buat akun Numpak Ngeng & nikmati seluruh fitur kami yang lebih mudah!
+        </div>
+        
+        <div class="form-container">
+            <label class="form-label">Email/No. Handphone</label>
+            <input type="text" class="form-input" placeholder="Masukkan email atau no. handphone-mu">
+            
+            <a href="halaman_login.html">
+                <button class="continue-button">Lanjutkan</button>
+            </a>
+            
+            <div class="divider">atau login/daftar dengan</div>
+            
+            <div class="social-buttons">
+                <a href="halaman_login.html" class="social-link">
+                    <button class="social-button google">
+                        <i class="fab fa-google social-icon"></i>
+                        Login dengan Google
+                    </button>
+                </a>
+                <a href="halaman_login.html" class="social-link">
+                    <button class="social-button facebook">
+                        <i class="fab fa-facebook social-icon"></i>
+                        Login dengan Facebook
+                    </button>
+                </a>
+            </div>
+            
+            <div class="terms">
+                Dengan mendaftar, kamu menyetujui <a href="#">Syarat & Ketentuan</a> yang berlaku dan kamu sudah membaca <a href="#">Pemberitahuan Privasi</a> kami.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const input = document.querySelector('.form-input');
+        const button = document.querySelector('.continue-button');
+
+        input.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                button.classList.add('active');
+                button.disabled = false;
+            } else {
+                button.classList.remove('active');
+                button.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
